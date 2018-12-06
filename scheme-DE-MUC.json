@@ -1,0 +1,277 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://example.com/schemas/example",
+  "title": "burokrat-residenz-scheme-DE-MUC",
+  "description": "JSON Schema based on Munich residence registration",
+  "definitions": {
+  },
+  "type": "object",
+  "properties": {
+    "details": {
+      "type": "object",
+      "title": "Details",
+      "additionalProperties": false,
+      "properties": {
+        "move-in-date": {
+          "type": "string",
+          "title": "Move In Date"
+        },
+        "new": {
+          "type": "object",
+          "title": "New",
+          "additionalProperties": false,
+          "properties": {
+            "address": {
+              "type": "string",
+              "format": "address",
+              "title": "New Address"
+            },
+            "postal": {
+              "type": "string",
+              "title": "New Postal Code"
+            }
+          }
+        },
+        "old": {
+          "type": "object",
+          "title": "Old",
+          "additionalProperties": false,
+          "properties": {
+            "address": {
+              "type": "string",
+              "format": "address",
+              "title": "Old Address"
+            },
+            "postal": {
+              "type": "string",
+              "title": "Old Postal Code"
+            },
+            "city": {
+              "type": "string",
+              "title": "Old City"
+            }
+          }
+        }
+      }
+    },
+    "principal": {
+      "type": "object",
+      "title": "Principal",
+      "additionalProperties": false,
+      "properties": {
+        "given-name": {
+          "type": "string",
+          "title": "Principal's Given Name"
+        },
+        "birth": {
+          "type": "object",
+          "title": "Birth",
+          "additionalProperties": false,
+          "properties": {
+            "date": {
+              "type": "string",
+              "format": "date",
+              "title": "Principal's Birth Date"
+            },
+            "place": {
+              "type": "string",
+              "title": "Principal's Birth Date"
+            }
+          }
+        },
+        "family-name": {
+          "type": "string",
+          "title": "Principal's Family Name"
+        },
+        "signature-date": {
+          "type": "string",
+          "format": "date",
+          "title": "Principal's Signature Date"
+        },
+        "signature": {
+          "type": "object",
+          "oneOf": [
+            {
+              "additionalProperties": false,
+              "required": [
+                "base64"
+              ],
+              "properties": {
+                "base64": {
+                  "type": "string",
+                  "media": {
+                    "binaryEncoding": "base64"
+                  },
+                  "title": "Base64 Encoded Image"
+                }
+              }
+            },
+            {
+              "additionalProperties": false,
+              "required": [
+                "url"
+              ],
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "url",
+                  "title": "Image URL",
+                  "description": "URL where the image can be downloaded."
+                }
+              }
+            },
+            {
+              "additionalProperties": false,
+              "required": [
+                "text"
+              ],
+              "properties": {
+                "text": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "name",
+                    "typeface"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "title": "Name",
+                      "description": "The signer's full name"
+                    },
+                    "typeface": {
+                      "type": "string",
+                      "title": "Typeface",
+                      "description": "Signature Typeface",
+                      "enum": [
+                        "Dancing Script",
+                        "Satisfy",
+                        "Cookie",
+                        "Great Vibes",
+                        "Caveat",
+                        "Sunshiney",
+                        "Sedgwick Ave",
+                        "Sacramento"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "x-input-type": "signature",
+          "x-input-aspect-ratio": 5.474,
+          "title": "Principal's Signature"
+        },
+        "family-status": {
+          "type": "string",
+          "enum": [
+            "LD",
+            "VH",
+            "VW",
+            "GS",
+            "LP",
+            "LV",
+            "LA",
+            "EA",
+            "LE",
+            "NB",
+            "",
+            null
+          ],
+          "title": "Principal's Family Status"
+        },
+        "citizenship": {
+          "type": "string",
+          "title": "Principal's Citizenship"
+        },
+        "religion": {
+          "type": "string",
+          "enum": [
+            "-",
+            "rk",
+            "ak",
+            "fa",
+            "fb",
+            "fg",
+            "fm",
+            "fs",
+            "ev",
+            "lt",
+            "rf",
+            "fr",
+            "ib",
+            "iw",
+            "isby",
+            "ishe",
+            "il",
+            "isnw",
+            "jh",
+            "isrp",
+            "issl",
+            "oa",
+            "",
+            null
+          ],
+          "title": "Principal's Religion"
+        },
+        "marriage-date": {
+          "type": "string",
+          "format": "date",
+          "title": "Principal's Marriage Date"
+        },
+        "id-doc": {
+          "type": "object",
+          "title": "Id-doc",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "PA",
+                "RP",
+                "KRP",
+                "KA",
+                "",
+                null
+              ],
+              "title": "Principal's ID Document Type"
+            },
+            "number": {
+              "type": "string",
+              "title": "Principal's ID Document Number"
+            },
+            "authority": {
+              "type": "string",
+              "title": "Principal's ID Document Authority"
+            },
+            "issue-date": {
+              "type": "string",
+              "format": "date",
+              "title": "Principal's ID Document Issue Date"
+            },
+            "valid-till": {
+              "type": "string",
+              "format": "date",
+              "title": "Principal's ID Document Valid Till"
+            }
+          }
+        },
+        "is-male": {
+          "type": "boolean",
+          "title": "Is principal male?"
+        },
+        "is-female": {
+          "type": "boolean",
+          "title": "Principal is female?"
+        },
+        "is-neutral": {
+          "type": "boolean",
+          "title": "Principal is neutral?"
+        }
+      },
+      "x-input-type": "signature"
+    }
+  },
+  "additionalProperties": false
+}
